@@ -1,0 +1,561 @@
+voclabs:~/environment $ pwd
+/home/ec2-user/environment
+voclabs:~/environment $ wget https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/DEV-AWS-MO-Building_2.0/lab-2-api.zip
+--2021-05-10 20:06:58--  https://aws-tc-largeobjects.s3-us-west-2.amazonaws.com/DEV-AWS-MO-Building_2.0/lab-2-api.zip
+Resolving aws-tc-largeobjects.s3-us-west-2.amazonaws.com (aws-tc-largeobjects.s3-us-west-2.amazonaws.com)... 52.218.241.25
+Connecting to aws-tc-largeobjects.s3-us-west-2.amazonaws.com (aws-tc-largeobjects.s3-us-west-2.amazonaws.com)|52.218.241.25|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3874004 (3.7M) [application/zip]
+Saving to: ‘lab-2-api.zip’
+
+lab-2-api.zip                                             100%[====================================================================================================================================>]   3.69M  --.-KB/s    in 0.09s   
+
+2021-05-10 20:06:59 (40.0 MB/s) - ‘lab-2-api.zip’ saved [3874004/3874004]
+
+voclabs:~/environment $ unzip lab-2-api.zip
+Archive:  lab-2-api.zip
+   creating: java8/
+   creating: java8/cors/
+  inflating: java8/cors/build.gradle  
+  inflating: java8/cors/my-app.iml   
+  inflating: java8/cors/pom.xml      
+   creating: java8/cors/src/
+   creating: java8/cors/src/main/
+   creating: java8/cors/src/main/java/
+   creating: java8/cors/src/main/java/com/
+   creating: java8/cors/src/main/java/com/mycompany/
+   creating: java8/cors/src/main/java/com/mycompany/app/
+  inflating: java8/cors/src/main/java/com/mycompany/app/App.java  
+   creating: java8/cors/src/test/
+   creating: java8/cors/src/test/java/
+   creating: java8/cors/src/test/java/com/
+   creating: java8/cors/src/test/java/com/mycompany/
+   creating: java8/cors/src/test/java/com/mycompany/app/
+ extracting: java8/cors/src/test/java/com/mycompany/app/AppTest.java  
+   creating: java8/mock/
+  inflating: java8/mock/build.gradle  
+  inflating: java8/mock/my-app.iml   
+  inflating: java8/mock/pom.xml      
+   creating: java8/mock/src/
+   creating: java8/mock/src/main/
+   creating: java8/mock/src/main/java/
+   creating: java8/mock/src/main/java/com/
+   creating: java8/mock/src/main/java/com/mycompany/
+   creating: java8/mock/src/main/java/com/mycompany/app/
+  inflating: java8/mock/src/main/java/com/mycompany/app/App.java  
+   creating: java8/mock/src/test/
+   creating: java8/mock/src/test/java/
+   creating: java8/mock/src/test/java/com/
+   creating: java8/mock/src/test/java/com/mycompany/
+   creating: java8/mock/src/test/java/com/mycompany/app/
+ extracting: java8/mock/src/test/java/com/mycompany/app/AppTest.java  
+   creating: node_10.18.1/
+  inflating: node_10.18.1/cors.js    
+  inflating: node_10.18.1/mock.js    
+   creating: python_3.6.8/
+  inflating: python_3.6.8/cors.py    
+  inflating: python_3.6.8/mock.py    
+   creating: resources/
+  inflating: resources/java_setup.sh  
+  inflating: resources/permissions.py  
+  inflating: resources/public_policy.json  
+  inflating: resources/setup.sh      
+  inflating: resources/setup2.sh     
+   creating: resources/website/
+  inflating: resources/website/backdrop_camera.jpg  
+  inflating: resources/website/callback.html  
+  inflating: resources/website/config.js  
+  inflating: resources/website/core.css  
+  inflating: resources/website/flex_search.js  
+  inflating: resources/website/index.html  
+  inflating: resources/website/jquery.js  
+  inflating: resources/website/kiosk.png  
+ extracting: resources/website/kiosk_bottom.png  
+ extracting: resources/website/kiosk_left.png  
+ extracting: resources/website/kiosk_right.png  
+  inflating: resources/website/kiosk_top.png  
+  inflating: resources/website/main.css  
+  inflating: resources/website/main.js  
+  inflating: resources/website/products.js  
+  inflating: resources/website/report.html  
+  inflating: resources/website/reset.css  
+  inflating: resources/website/search.css  
+  inflating: resources/website/search.js  
+voclabs:~/environment $ rm lab-2-api.zip
+voclabs:~/environment $ chmod +x ./resources/setup.sh && ./resources/setup.sh
+Collecting boto3
+  Downloading https://files.pythonhosted.org/packages/73/6d/47a187ea163c6e1791faae1fc8e45b584ba0076ca51ce93ff2824a1c8b98/boto3-1.17.70-py2.py3-none-any.whl (131kB)
+    100% |████████████████████████████████| 133kB 3.7MB/s 
+Requirement already satisfied: jmespath<1.0.0,>=0.7.1 in /usr/local/lib/python3.6/site-packages (from boto3)
+Collecting botocore<1.21.0,>=1.20.70 (from boto3)
+  Downloading https://files.pythonhosted.org/packages/54/69/3e71ecaeaeecd78c5e33161690e1c39856258108e9f42a153af56db5a88c/botocore-1.20.70-py2.py3-none-any.whl (7.5MB)
+    100% |████████████████████████████████| 7.5MB 170kB/s 
+Requirement already satisfied: s3transfer<0.5.0,>=0.4.0 in /usr/local/lib/python3.6/site-packages (from boto3)
+Requirement already satisfied: urllib3<1.27,>=1.25.4 in /usr/local/lib/python3.6/site-packages (from botocore<1.21.0,>=1.20.70->boto3)
+Requirement already satisfied: python-dateutil<3.0.0,>=2.1 in /usr/local/lib/python3.6/site-packages (from botocore<1.21.0,>=1.20.70->boto3)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.6/site-packages (from python-dateutil<3.0.0,>=2.1->botocore<1.21.0,>=1.20.70->boto3)
+Installing collected packages: botocore, boto3
+  Found existing installation: botocore 1.20.61
+    Uninstalling botocore-1.20.61:
+      Successfully uninstalled botocore-1.20.61
+Successfully installed boto3-1.17.70 botocore-1.20.70
+You are using pip version 9.0.3, however version 21.1.1 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+
+Please enter a valid IP address:
+42.106.27.36
+IP address:42.106.27.36
+upload: resources/website/backdrop_camera.jpg to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/backdrop_camera.jpg
+upload: resources/website/callback.html to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/callback.html
+upload: resources/website/config.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/config.js
+upload: resources/website/core.css to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/core.css
+upload: resources/website/flex_search.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/flex_search.js
+upload: resources/website/index.html to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/index.html
+upload: resources/website/jquery.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/jquery.js
+upload: resources/website/kiosk.png to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/kiosk.png
+upload: resources/website/kiosk_bottom.png to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/kiosk_bottom.png
+upload: resources/website/kiosk_left.png to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/kiosk_left.png
+upload: resources/website/kiosk_right.png to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/kiosk_right.png
+upload: resources/website/kiosk_top.png to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/kiosk_top.png
+upload: resources/website/main.css to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/main.css
+upload: resources/website/main.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/main.js
+upload: resources/website/products.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/products.js
+upload: resources/website/report.html to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/report.html
+upload: resources/website/reset.css to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/reset.css
+upload: resources/website/search.css to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/search.css
+upload: resources/website/search.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/search.js
+DONE
+voclabs:~/environment $ cd python_3.6.8/
+voclabs:~/environment/python_3.6.8 $ ls
+cors.py  mock.py
+voclabs:~/environment/python_3.6.8 $ python3 mock.py
+DONE
+voclabs:~/environment/python_3.6.8 $ chmod +x ../resources/setup2.sh && ../resources/setup2.sh
+upload: ../resources/website/config.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/config.js
+voclabs:~/environment/python_3.6.8 $ chmod +x ../resources/setup2.sh && ../resources/setup2.sh
+upload: ../resources/website/config.js to s3://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb/config.js
+voclabs:~/environment/python_3.6.8 $ source /home/ec2-user/.bashrc && echo $bucket_url
+https://c11284a122552l631302t1w427120135854-s3bucket-a52tjyc0lnlb.s3-us-west-2.amazonaws.com/index.html
+voclabs:~/environment/python_3.6.8 $ python3 cors.py
+DONE
+voclabs:~/environment/python_3.6.8 $ cd ..
+voclabs:~/environment $ git clone https://github.com/darksoul03/Coursera_BuildingModernAppsDemo.git
+Cloning into 'Coursera_BuildingModernAppsDemo'...
+remote: Enumerating objects: 178, done.
+remote: Counting objects: 100% (178/178), done.
+remote: Compressing objects: 100% (97/97), done.
+remote: Total 178 (delta 30), reused 173 (delta 28), pack-reused 0
+Receiving objects: 100% (178/178), 3.71 MiB | 33.93 MiB/s, done.
+Resolving deltas: 100% (30/30), done.
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ rm -rf Coursera_BuildingModernAppsDemo/ 
+voclabs:~/environment $ ;s
+bash: syntax error near unexpected token `;'
+voclabs:~/environment $ ls
+java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ mkdir lab2
+voclabs:~/environment $ cp -rf * lab2/
+cp: cannot copy a directory, ‘lab2’, into itself, ‘lab2/lab2’
+voclabs:~/environment $ ls
+java8  lab2  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ cd lab2/
+voclabs:~/environment/lab2 $ ls
+java8  lab2  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment/lab2 $ cd ..
+voclabs:~/environment $ git clone https://github.com/darksoul03/Coursera_BuildingModernAppsDemo.git
+Cloning into 'Coursera_BuildingModernAppsDemo'...
+remote: Enumerating objects: 178, done.
+remote: Counting objects: 100% (178/178), done.
+remote: Compressing objects: 100% (97/97), done.
+remote: Total 178 (delta 30), reused 173 (delta 28), pack-reused 0
+Receiving objects: 100% (178/178), 3.71 MiB | 19.69 MiB/s, done.
+Resolving deltas: 100% (30/30), done.
+voclabs:~/environment $ mv lab2 Coursera_BuildingModernAppsDemo/Build/
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ cd Coursera_BuildingModernAppsDemo/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls
+Build  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ cd Build/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ ls
+API Gateway Demo  Dragon Data  lab2  Lambda Code  Permissions  README.txt  Step Functions
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ mv lab2/ /home/ec2-user/environment/Coursera_BuildingModernAppsDemo/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ ls
+API Gateway Demo  Dragon Data  Lambda Code  Permissions  README.txt  Step Functions
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ cd 
+voclabs:~ $ ls
+environment  node_modules  package-lock.json
+voclabs:~ $ cd //
+voclabs:// $ ;s
+bash: syntax error near unexpected token `;'
+voclabs:// $ ls
+bin  boot  cgroup  dev  etc  home  lib  lib64  local  lost+found  media  mnt  nvm-install.txt  opt  proc  root  run  sbin  selinux  srv  sys  tmp  usr  var
+voclabs:// $ cd /home/ec2-user/environment/Coursera_BuildingModernAppsDemo/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls
+Build  lab2  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ mv Build lab1
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls
+lab1  lab2  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ mkdir Build
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ mv lab
+lab1/ lab2/ 
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ mv lab* Build
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls
+Build  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    Build/API Gateway Demo/ReportDragonMapping.vtl
+        deleted:    Build/API Gateway Demo/ResponseMappingForMock.vtl
+        deleted:    Build/API Gateway Demo/dragon_model.json
+        deleted:    Build/API Gateway Demo/dragon_payload.json
+        deleted:    Build/Dragon Data/dragon_stats_one.json
+        deleted:    Build/Lambda Code/Java/Commands_Lambda_XRay.txt
+        deleted:    Build/Lambda Code/Java/Commands_SDK_Exploration.txt
+        deleted:    Build/Lambda Code/Java/lambda-demo/addDragon/add-dragon/build.gradle
+        deleted:    Build/Lambda Code/Java/lambda-demo/addDragon/add-dragon/pom.xml
+        deleted:    Build/Lambda Code/Java/lambda-demo/addDragon/add-dragon/src/main/java/com/mycompany/app/App.java
+        deleted:    Build/Lambda Code/Java/lambda-demo/addDragon/add-dragon/src/main/java/com/mycompany/app/model/Dragon.java
+        deleted:    Build/Lambda Code/Java/lambda-demo/addDragon/dragon_payload.json
+        deleted:    Build/Lambda Code/Java/lambda-demo/listDragons/my-app/build.gradle
+        deleted:    Build/Lambda Code/Java/lambda-demo/listDragons/my-app/pom.xml
+        deleted:    Build/Lambda Code/Java/lambda-demo/listDragons/my-app/src/main/java/com/mycompany/app/App.java
+        deleted:    Build/Lambda Code/Java/lambda-demo/validateDragon/dragon_payload.json
+        deleted:    Build/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/build.gradle
+        deleted:    Build/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/pom.xml
+        deleted:    Build/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/src/main/java/com/mycompany/app/App.java
+        deleted:    Build/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/src/main/java/com/mycompany/app/DragonValidationException.java
+        deleted:    Build/Lambda Code/Java/sdkExploration/my-app/pom.xml
+        deleted:    Build/Lambda Code/Java/sdkExploration/my-app/src/main/java/com/mycompany/app/App.java
+        deleted:    Build/Lambda Code/Java/xray-demo/my-app/build.gradle
+        deleted:    Build/Lambda Code/Java/xray-demo/my-app/pom.xml
+        deleted:    Build/Lambda Code/Java/xray-demo/my-app/src/main/java/com/mycompany/app/App.java
+        deleted:    Build/Lambda Code/Node/examples/add-dragon/Commands.txt
+        deleted:    Build/Lambda Code/Node/examples/add-dragon/addDragon.js
+        deleted:    Build/Lambda Code/Node/examples/add-dragon/newDragonPayload.json
+        deleted:    Build/Lambda Code/Node/examples/add-dragon/package-lock.json
+        deleted:    Build/Lambda Code/Node/examples/list-dragons/Commands
+        deleted:    Build/Lambda Code/Node/examples/list-dragons/listDragonsLambda.js
+        deleted:    Build/Lambda Code/Node/examples/sdk-exploration/Node SDK Exploration Commands
+        deleted:    Build/Lambda Code/Node/examples/sdk-exploration/listDragons.js
+        deleted:    Build/Lambda Code/Node/examples/validate-dragon/Commands.txt
+        deleted:    Build/Lambda Code/Node/examples/validate-dragon/duplicateDragonPayload.json
+        deleted:    Build/Lambda Code/Node/examples/validate-dragon/newDragonPayload.json
+        deleted:    Build/Lambda Code/Node/examples/validate-dragon/package-lock.json
+        deleted:    Build/Lambda Code/Node/examples/validate-dragon/validateDragon.js
+        deleted:    Build/Lambda Code/Python/SDK Exploration/app.py
+        deleted:    Build/Lambda Code/Python/SDK Exploration/client.py
+        deleted:    Build/Lambda Code/Python/SDK Exploration/resource.py
+        deleted:    Build/Lambda Code/Python/add-dragon/Commands.txt
+        deleted:    Build/Lambda Code/Python/add-dragon/addDragon.py
+        deleted:    Build/Lambda Code/Python/add-dragon/newDragonPayload.json
+        deleted:    Build/Lambda Code/Python/list-dragons/Commands.txt
+        deleted:    Build/Lambda Code/Python/list-dragons/X-Ray Commands.txt
+        deleted:    Build/Lambda Code/Python/list-dragons/listDragons.py
+        deleted:    Build/Lambda Code/Python/validate-dragon/Commands.txt
+        deleted:    Build/Lambda Code/Python/validate-dragon/duplicateDragonPayload.json
+        deleted:    Build/Lambda Code/Python/validate-dragon/newDragonPayload.json
+        deleted:    Build/Lambda Code/Python/validate-dragon/validateDragon.py
+        deleted:    Build/Permissions/S3BucketPolicy.json
+        deleted:    Build/README.txt
+        deleted:    Build/Step Functions/ReportDragonStepFunction.json
+        deleted:    Build/Step Functions/StartExecutionPayloadExample.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        Build/lab1/
+        Build/lab2/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git add .
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git commit -m "Lab2 adding"
+[main 39056b2] Lab2 adding
+ Committer: EC2 Default User <ec2-user@ip-10-16-10-92.us-west-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 94 files changed, 4710 insertions(+)
+ rename Build/{ => lab1}/API Gateway Demo/ReportDragonMapping.vtl (100%)
+ rename Build/{ => lab1}/API Gateway Demo/ResponseMappingForMock.vtl (100%)
+ rename Build/{ => lab1}/API Gateway Demo/dragon_model.json (100%)
+ rename Build/{ => lab1}/API Gateway Demo/dragon_payload.json (100%)
+ rename Build/{ => lab1}/Dragon Data/dragon_stats_one.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/Commands_Lambda_XRay.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/Commands_SDK_Exploration.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/addDragon/add-dragon/build.gradle (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/addDragon/add-dragon/pom.xml (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/addDragon/add-dragon/src/main/java/com/mycompany/app/App.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/addDragon/add-dragon/src/main/java/com/mycompany/app/model/Dragon.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/addDragon/dragon_payload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/listDragons/my-app/build.gradle (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/listDragons/my-app/pom.xml (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/listDragons/my-app/src/main/java/com/mycompany/app/App.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/validateDragon/dragon_payload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/build.gradle (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/pom.xml (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/src/main/java/com/mycompany/app/App.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/lambda-demo/validateDragon/validate-dragon/src/main/java/com/mycompany/app/DragonValidationException.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/sdkExploration/my-app/pom.xml (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/sdkExploration/my-app/src/main/java/com/mycompany/app/App.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/xray-demo/my-app/build.gradle (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/xray-demo/my-app/pom.xml (100%)
+ rename Build/{ => lab1}/Lambda Code/Java/xray-demo/my-app/src/main/java/com/mycompany/app/App.java (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/add-dragon/Commands.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/add-dragon/addDragon.js (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/add-dragon/newDragonPayload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/add-dragon/package-lock.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/list-dragons/Commands (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/list-dragons/listDragonsLambda.js (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/sdk-exploration/Node SDK Exploration Commands (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/sdk-exploration/listDragons.js (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/validate-dragon/Commands.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/validate-dragon/duplicateDragonPayload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/validate-dragon/newDragonPayload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/validate-dragon/package-lock.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Node/examples/validate-dragon/validateDragon.js (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/SDK Exploration/app.py (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/SDK Exploration/client.py (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/SDK Exploration/resource.py (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/add-dragon/Commands.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/add-dragon/addDragon.py (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/add-dragon/newDragonPayload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/list-dragons/Commands.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/list-dragons/X-Ray Commands.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/list-dragons/listDragons.py (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/validate-dragon/Commands.txt (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/validate-dragon/duplicateDragonPayload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/validate-dragon/newDragonPayload.json (100%)
+ rename Build/{ => lab1}/Lambda Code/Python/validate-dragon/validateDragon.py (100%)
+ rename Build/{ => lab1}/Permissions/S3BucketPolicy.json (100%)
+ rename Build/{ => lab1}/README.txt (100%)
+ rename Build/{ => lab1}/Step Functions/ReportDragonStepFunction.json (100%)
+ rename Build/{ => lab1}/Step Functions/StartExecutionPayloadExample.json (100%)
+ create mode 100644 Build/lab2/README.md
+ create mode 100644 Build/lab2/java8/cors/build.gradle
+ create mode 100644 Build/lab2/java8/cors/my-app.iml
+ create mode 100644 Build/lab2/java8/cors/pom.xml
+ create mode 100644 Build/lab2/java8/cors/src/main/java/com/mycompany/app/App.java
+ create mode 100644 Build/lab2/java8/cors/src/test/java/com/mycompany/app/AppTest.java
+ create mode 100644 Build/lab2/java8/mock/build.gradle
+ create mode 100644 Build/lab2/java8/mock/my-app.iml
+ create mode 100644 Build/lab2/java8/mock/pom.xml
+ create mode 100644 Build/lab2/java8/mock/src/main/java/com/mycompany/app/App.java
+ create mode 100644 Build/lab2/java8/mock/src/test/java/com/mycompany/app/AppTest.java
+ create mode 100644 Build/lab2/node_10.18.1/cors.js
+ create mode 100644 Build/lab2/node_10.18.1/mock.js
+ create mode 100644 Build/lab2/python_3.6.8/cors.py
+ create mode 100644 Build/lab2/python_3.6.8/mock.py
+ create mode 100644 Build/lab2/resources/java_setup.sh
+ create mode 100644 Build/lab2/resources/permissions.py
+ create mode 100644 Build/lab2/resources/public_policy.json
+ create mode 100755 Build/lab2/resources/setup.sh
+ create mode 100755 Build/lab2/resources/setup2.sh
+ create mode 100644 Build/lab2/resources/website/backdrop_camera.jpg
+ create mode 100644 Build/lab2/resources/website/callback.html
+ create mode 100644 Build/lab2/resources/website/config.js
+ create mode 100644 Build/lab2/resources/website/core.css
+ create mode 100644 Build/lab2/resources/website/flex_search.js
+ create mode 100644 Build/lab2/resources/website/index.html
+ create mode 100644 Build/lab2/resources/website/jquery.js
+ create mode 100644 Build/lab2/resources/website/kiosk.png
+ create mode 100644 Build/lab2/resources/website/kiosk_bottom.png
+ create mode 100644 Build/lab2/resources/website/kiosk_left.png
+ create mode 100644 Build/lab2/resources/website/kiosk_right.png
+ create mode 100644 Build/lab2/resources/website/kiosk_top.png
+ create mode 100644 Build/lab2/resources/website/main.css
+ create mode 100644 Build/lab2/resources/website/main.js
+ create mode 100644 Build/lab2/resources/website/products.js
+ create mode 100644 Build/lab2/resources/website/report.html
+ create mode 100644 Build/lab2/resources/website/reset.css
+ create mode 100644 Build/lab2/resources/website/search.css
+ create mode 100644 Build/lab2/resources/website/search.js
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git branches -a
+git: 'branches' is not a git command. See 'git --help'.
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git branche -a
+git: 'branche' is not a git command. See 'git --help'.
+
+The most similar command is
+        branch
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/lab1
+  remotes/origin/main
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls 
+Build  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ cd Build/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ ls
+lab1  lab2
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ cp -rf lab1 /home/ec2-user/environment/                                                                                                                           
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ ls
+lab1  lab2
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ cd ..
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls
+Build  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ git checkout lab1
+Branch 'lab1' set up to track remote branch 'lab1' from 'origin'.
+Switched to a new branch 'lab1'
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab1) $ ls
+Build  lab1  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab1) $ cd
+voclabs:~ $ ..
+bash: ..: command not found
+voclabs:~ $ ls
+environment  node_modules  package-lock.json
+voclabs:~ $ cd /home/ec2-user/environment/
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  lab1  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ mv lab1 Coursera_BuildingModernAppsDemo/
+mv: cannot move ‘lab1’ to ‘Coursera_BuildingModernAppsDemo/lab1’: Directory not empty
+voclabs:~/environment $ mv lab1 Coursera_BuildingModernAppsDemo
+mv: cannot move ‘lab1’ to ‘Coursera_BuildingModernAppsDemo/lab1’: Directory not empty
+voclabs:~/environment $ mv lab1 Coursera_BuildingModernAppsDemo/ls
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ cd Coursera_BuildingModernAppsDemo/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab1) $ ls
+Build  lab1  LICENSE  ls  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab1) $ rm -rf ls
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab1) $ git checkout master
+error: pathspec 'master' did not match any file(s) known to git.
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab1) $ git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ ls
+Build  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (main) $ cd Build/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ ls
+lab1  lab2
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ cp -rf lab2 /home/ec2-user/environment/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (main) $ git checkout lab1 
+Switched to branch 'lab1'
+Your branch is up to date with 'origin/lab1'.
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (lab1) $ git checkout -b lab2
+Switched to a new branch 'lab2'
+voclabs:~/environment/Coursera_BuildingModernAppsDemo/Build (lab2) $ cd 
+voclabs:~ $ 
+voclabs:~ $ cd /home/ec2-user/environment/Coursera_BuildingModernAppsDemo/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ ls
+Build  lab1  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ cd ..
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  lab2  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ mv lab2 Coursera_BuildingModernAppsDemo/
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ cd Coursera_BuildingModernAppsDemo/
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ ls
+Build  lab1  lab2  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git status
+On branch lab2
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        lab2/
+
+nothing added to commit but untracked files present (use "git add" to track)
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git add .
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git commit -m "Adding lab2"
+[lab2 e29af1a] Adding lab2
+ Committer: EC2 Default User <ec2-user@ip-10-16-10-92.us-west-2.compute.internal>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 39 files changed, 4710 insertions(+)
+ create mode 100644 lab2/README.md
+ create mode 100644 lab2/java8/cors/build.gradle
+ create mode 100644 lab2/java8/cors/my-app.iml
+ create mode 100644 lab2/java8/cors/pom.xml
+ create mode 100644 lab2/java8/cors/src/main/java/com/mycompany/app/App.java
+ create mode 100644 lab2/java8/cors/src/test/java/com/mycompany/app/AppTest.java
+ create mode 100644 lab2/java8/mock/build.gradle
+ create mode 100644 lab2/java8/mock/my-app.iml
+ create mode 100644 lab2/java8/mock/pom.xml
+ create mode 100644 lab2/java8/mock/src/main/java/com/mycompany/app/App.java
+ create mode 100644 lab2/java8/mock/src/test/java/com/mycompany/app/AppTest.java
+ create mode 100644 lab2/node_10.18.1/cors.js
+ create mode 100644 lab2/node_10.18.1/mock.js
+ create mode 100644 lab2/python_3.6.8/cors.py
+ create mode 100644 lab2/python_3.6.8/mock.py
+ create mode 100644 lab2/resources/java_setup.sh
+ create mode 100644 lab2/resources/permissions.py
+ create mode 100644 lab2/resources/public_policy.json
+ create mode 100755 lab2/resources/setup.sh
+ create mode 100755 lab2/resources/setup2.sh
+ create mode 100644 lab2/resources/website/backdrop_camera.jpg
+ create mode 100644 lab2/resources/website/callback.html
+ create mode 100644 lab2/resources/website/config.js
+ create mode 100644 lab2/resources/website/core.css
+ create mode 100644 lab2/resources/website/flex_search.js
+ create mode 100644 lab2/resources/website/index.html
+ create mode 100644 lab2/resources/website/jquery.js
+ create mode 100644 lab2/resources/website/kiosk.png
+ create mode 100644 lab2/resources/website/kiosk_bottom.png
+ create mode 100644 lab2/resources/website/kiosk_left.png
+ create mode 100644 lab2/resources/website/kiosk_right.png
+ create mode 100644 lab2/resources/website/kiosk_top.png
+ create mode 100644 lab2/resources/website/main.js
+ create mode 100644 lab2/resources/website/products.js
+ create mode 100644 lab2/resources/website/report.html
+ create mode 100644 lab2/resources/website/reset.css
+ create mode 100644 lab2/resources/website/search.css
+ create mode 100644 lab2/resources/website/search.js
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git status
+On branch lab2
+nothing to commit, working tree clean
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git push origin lab2
+Username for 'https://github.com/darksoul03/Coursera_BuildingModernAppsDemo.git': darksoul03
+Password for 'https://darksoul03@github.com/darksoul03/Coursera_BuildingModernAppsDemo.git': 
+Enumerating objects: 44, done.
+Counting objects: 100% (44/44), done.
+Compressing objects: 100% (27/27), done.
+Writing objects: 100% (43/43), 16.15 KiB | 1.79 MiB/s, done.
+Total 43 (delta 4), reused 0 (delta 0)
+remote: Resolving deltas: 100% (4/4), completed with 1 local object.
+remote: 
+remote: Create a pull request for 'lab2' on GitHub by visiting:
+remote:      https://github.com/darksoul03/Coursera_BuildingModernAppsDemo/pull/new/lab2
+remote: 
+To https://github.com/darksoul03/Coursera_BuildingModernAppsDemo.git
+ * [new branch]      lab2 -> lab2
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ ls
+Build  lab1  lab2  LICENSE  README.md
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git push main
+fatal: 'main' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ git push origin main                                                                                                                                                    
+Username for 'https://github.com/darksoul03/Coursera_BuildingModernAppsDemo.git': ^X^C
+voclabs:~/environment/Coursera_BuildingModernAppsDemo (lab2) $ cd ..
+voclabs:~/environment $ ls
+Coursera_BuildingModernAppsDemo  java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ rm -rf Coursera_BuildingModernAppsDemo
+voclabs:~/environment $ ls
+java8  node_10.18.1  python_3.6.8  README.md  resources
+voclabs:~/environment $ 
